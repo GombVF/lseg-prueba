@@ -2,6 +2,7 @@ package lseg.example.prueba.model.mapper;
 
 import lseg.example.prueba.model.Tasks;
 import lseg.example.prueba.model.dto.TasksRequest;
+import lseg.example.prueba.model.dto.TasksResponse;
 import lseg.example.prueba.util.enums.Status;
 import org.springframework.stereotype.Component;
 
@@ -21,8 +22,8 @@ public class TasksMapper {
         return aux.build();
     }
 
-    public TasksRequest convertToTasksRequest(Tasks tasks){
-        TasksRequest.TasksRequestBuilder aux = TasksRequest.builder().id(tasks.getId().toString()).title(tasks.getTitle())
+    public TasksResponse convertToTasksResponse(Tasks tasks){
+        TasksResponse.TasksResponseBuilder aux = TasksResponse.builder().id(tasks.getId().toString()).title(tasks.getTitle())
                 .description(tasks.getDescription()).status(tasks.getStatus().toString());
         if(tasks.getDueDate() != null){
             aux.dueDate(tasks.getDueDate().toString());

@@ -14,10 +14,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Schema(description = "Clase DTO para las peticiones relacionada a las Tasks")
-public class TasksRequest {
+@Schema(description = "Clase DTO para las respuestas relacionada a las Tasks")
+public class TasksResponse {
+    @Schema(description = "Identificador que puede o no venir en la petición", example = "e8a98ab1-0fc9-4d59-9d18-0ca8335d413c")
+    private String id;
     @NotNull
-    @Schema(description = "Titulo de la tarea", example = "Creación del CRUD del API", required = true)
+    @Schema(description = "Titulo de la tarea", example = "Creación del CRUD del API")
     private String title;
     @Schema(description = "Descripción de la tarea", example = "Creación de los endpoints GET, POST, PUT y DELETE para un CRUD funcional del API")
     private String description;
@@ -26,6 +28,6 @@ public class TasksRequest {
     private String dueDate;
     @NotNull
     @Pattern(regexp = "^(pending|completed|in-progress)$", message = "El estatus debe de ser uno de los siguientes estatus: 'completed', 'pending' o 'in-progress'")
-    @Schema(description = "Estatus de la tarea", example = "ENUM('pending', 'completed', 'in-progress')", required = true)
+    @Schema(description = "Estatus de la tarea", example = "ENUM('pending', 'completed', 'in-progress')")
     private String status;
 }
