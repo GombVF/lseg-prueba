@@ -11,7 +11,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - mariadb_data:/var/lib/mysql
+      - ./localDatabase.sql:/docker-entrypoint-initdb.d/localDatabase.sql
 
   app:
     build: .
@@ -23,7 +23,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb:3306/lsegtest
       SPRING_DATASOURCE_USERNAME: lsegDBAdmin
       SPRING_DATASOURCE_PASSWORD: lsegpassword
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none
 
 volumes:
   mariadb_data:
