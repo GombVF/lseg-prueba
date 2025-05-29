@@ -18,12 +18,12 @@ public class TasksServiceImpl implements  TasksService{
 
     @Override
     public Tasks addTask(Tasks task) {
-        return null;
+        return tasksRepository.save(task);
     }
 
     @Override
-    public Tasks getTaskById(UUID uuid) {
-        return tasksRepository.findById(uuid).orElse(null);
+    public Optional<Tasks> getTaskById(UUID uuid) {
+        return tasksRepository.findById(uuid);
     }
 
     @Override
@@ -47,5 +47,10 @@ public class TasksServiceImpl implements  TasksService{
     @Override
     public void deleteTaskById(UUID uuid) {
         tasksRepository.deleteById(uuid);
+    }
+
+    @Override
+    public boolean existsTaskById(UUID uuid) {
+        return tasksRepository.existsById(uuid);
     }
 }

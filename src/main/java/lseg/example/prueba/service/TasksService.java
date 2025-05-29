@@ -8,8 +8,9 @@ import java.util.UUID;
 
 public interface TasksService {
     Tasks addTask(Tasks task);
-    Tasks getTaskById(UUID uuid);
+    Optional<Tasks> getTaskById(UUID uuid);
     List<Tasks> getAllTasks();
     Tasks updateTaskById(UUID uuid, Tasks task);
     void deleteTaskById(UUID uuid);
+    boolean existsTaskById(UUID uuid);
 }

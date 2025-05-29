@@ -22,7 +22,7 @@ public enum Status {
     @JsonCreator  // Used during deserialization (JSON → Java)
     public static Status fromValue(String value) {
         for (Status status : Status.values()) {
-            if (status.value.equalsIgnoreCase(value)) {
+            if (status.getValue().equalsIgnoreCase(value)) {
                 return status;
             }
         }
