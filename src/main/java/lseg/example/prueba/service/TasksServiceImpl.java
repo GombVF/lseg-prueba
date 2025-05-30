@@ -2,6 +2,8 @@ package lseg.example.prueba.service;
 
 import lseg.example.prueba.model.Tasks;
 import lseg.example.prueba.repository.TasksRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class TasksServiceImpl implements  TasksService{
+public class TasksServiceImpl implements TasksService{
     private final TasksRepository tasksRepository;
 
     public TasksServiceImpl(TasksRepository tasksRepository) {
@@ -27,8 +29,8 @@ public class TasksServiceImpl implements  TasksService{
     }
 
     @Override
-    public List<Tasks> getAllTasks() {
-        return tasksRepository.findAll();
+    public Page<Tasks> getAllTasks(Pageable pageable) {
+        return tasksRepository.findAll(pageable);
     }
 
     @Override

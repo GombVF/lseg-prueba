@@ -13,16 +13,16 @@ import lseg.example.prueba.model.dto.TasksResponse;
 import lseg.example.prueba.model.mapper.TasksMapper;
 import lseg.example.prueba.service.TasksService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -59,8 +59,8 @@ public class TasksController {
             @ApiResponse(responseCode = "200", description = "Tareas consultadas correctamente", content = @Content(schema = @Schema(implementation = List.class))),
     })
     @GetMapping
-    public ResponseEntity<List<TasksResponse>> getAllTasks() {
-        List<TasksResponse> allTasks = tasksService.getAllTasks().stream().map(tasksMapper::convertToTasksResponse).toList();
+    public ResponseEntity<Page<TasksResponse>> getAllTasks(@PageableDefault Pageable pageable) {
+        Page<TasksResponse> allTasks = tasksService.getAllTasks(pageable).map(tasksMapper::convertToTasksResponse);
         return ResponseEntity.ok(allTasks);
     }
 
